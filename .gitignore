@@ -1,0 +1,26 @@
+# Dependencies and build output
+node_modules/
+web/node_modules/
+web/dist/
+
+# Runtime data: SQLite databases, knowledge base, uploads, worker logs, backups
+data/
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Local tooling
+.serena/
+graphify-out/
+.backup-nuit/
+.DS_Store

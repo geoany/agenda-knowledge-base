@@ -1,0 +1,15 @@
+# The anti-corpus of the note recall index.
+#
+# Every word that appears here is DISQUALIFIED as a trigger, however rare it is
+# in the knowledge base. Put here sentences you really type that need no
+# knowledge at all: code, server operations, logistics, small talk. One more
+# sentence here is better than one more word in a blacklist, because it brings
+# its whole vocabulary at once and stays true as the base grows.
+#
+# One sentence per line. Lines starting with # are ignored.
+
+restart the server and show me the last lines of the logs
+move this task to tomorrow morning
+what do I have today
+add bread and milk to the shopping list
+thanks, that looks good

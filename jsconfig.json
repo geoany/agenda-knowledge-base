@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "es2022",
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "resolveJsonModule": true
+  },
+  "include": ["server/**/*.js", "mcp/**/*.js", "scripts/**/*.mjs", "web/**/*.js", "web/**/*.jsx"],
+  "exclude": ["node_modules", "graphify-out", "data"]
+}

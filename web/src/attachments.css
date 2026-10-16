@@ -1,0 +1,151 @@
+/* ------------------------------------------------------------------ */
+/* Attachments: images, files, links                                   */
+/* ------------------------------------------------------------------ */
+/* This whole file uses only the theme variables already defined in      */
+/* styles.css: nothing is hard-coded here, so the light theme works      */
+/* without a single duplicated rule.                                     */
+
+.att{display:flex;flex-direction:column;gap:7px;margin:5px 0 2px;min-width:0}
+.att.dense{gap:5px;margin:3px 0 1px}
+
+/* --------------------------- images -------------------------------- */
+/* The thumbnails line up and wrap: a wide screenshot and a square photo
+   must fit side by side without either one dictating the height of the
+   others. */
+.attimgs{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+
+.attimg{position:relative;margin:0;line-height:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--line2);background:var(--card)}
+.attimg .attzoom{display:block;padding:0;background:none;cursor:zoom-in}
+.attimg img{
+  display:block;max-width:min(230px,100%);max-height:150px;width:auto;height:auto;
+  object-fit:cover;
+}
+.att.dense .attimg img{max-width:min(150px,100%);max-height:96px}
+.attimg:hover{border-color:var(--btn-line-h)}
+/* As long as the upload has not answered, the local thumbnail is already
+   there but dimmed: you can see the image exists and is not filed yet. */
+.attimg.sending,.attcard.sending{opacity:.62}
+
+/* --------------------------- cards --------------------------------- */
+.attcard{position:relative;border:1px solid var(--line2);background:var(--card);border-radius:var(--r-lg);min-width:0}
+.attcard:hover{border-color:var(--btn-line-h)}
+.attcard .attbody{
+  display:flex;align-items:center;gap:10px;padding:9px 11px;
+  text-decoration:none;color:inherit;min-width:0;
+}
+.attcard.link .attbody{align-items:flex-start;gap:11px}
+.atttxt{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+
+/* The title fits on ONE line, cut with an ellipsis: a card whose height
+   depends on the length of the title breaks the alignment of the whole
+   grid. */
+.atttitle{
+  color:var(--txt-strong);font-weight:600;font-size:var(--fs-sm);line-height:1.35;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.attdesc{
+  color:var(--dim);font-size:var(--fs-sm);line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
+}
+.attsub{color:var(--dimmer);font-size:var(--fs-xs)}
+
+/* The foot of the link card: the site favicon, then its domain in small type. */
+.attsite{display:flex;align-items:center;gap:6px;margin-top:3px;min-width:0}
+.attfav{width:14px;height:14px;border-radius:var(--r-sm);flex:none;object-fit:contain;background:var(--input-bg)}
+/* No readable favicon: a dot with the initial of the domain, rather than a
+   hole in the card. */
+.attfav.empty{
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-xs);font-weight:600;color:var(--dimmer);border:1px solid var(--line2);
+}
+.attdomain{color:var(--dimmer);font-size:var(--fs-xs);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* The illustration image of the link stays a thumbnail: it illustrates, it
+   does not tell the story. */
+.attog{width:64px;height:64px;border-radius:var(--r);object-fit:cover;flex:none;background:var(--input-bg)}
+
+/* The file extension, as a dot: that is what you read first to know whether
+   you are about to open a spreadsheet or a PDF. */
+.attext{
+  display:flex;align-items:center;justify-content:center;flex:none;
+  width:34px;height:34px;border-radius:var(--r);
+  background:var(--acc-bg);border:1px solid var(--acc-line);color:var(--acc);
+  font-size:var(--fs-xs);font-weight:600;letter-spacing:.02em;
+}
+.attgo{color:var(--dimmer);flex:none;display:flex}
+.attcard.file .attbody:hover .attgo{color:var(--acc)}
+
+/* The remove button only appears on hover on a large screen, and stays
+   always visible with a finger: on a phone there is no hover, and an
+   attachment you cannot take away is a dead end. */
+.attremove{
+  position:absolute;top:-8px;right:-8px;background:var(--pop);border-color:var(--pop-line);
+  border-radius:var(--r-pill);opacity:0;transition:opacity .12s;
+}
+.attimg:hover .attremove,.attcard:hover .attremove,.attremove:focus-visible{opacity:1}
+.attremove:hover{color:var(--txt);border-color:var(--btn-line-h)}
+@media (hover:none){.attremove{opacity:1}}
+
+/* --------------------------- drop ---------------------------------- */
+/* The native file field cannot be styled: we hide it and trigger its click
+   from our own button. */
+.attfile{display:none}
+/* The paperclip is an ordinary button (.btn.ico): nothing to add to it. */
+
+/* During a drag-and-drop, the drop zone signals itself with its own outline:
+   without visual feedback, you drop the file beside it and it opens in the
+   browser, which leaves the application. */
+.attdrop{position:relative}
+.attdrop.dropover::after{
+  content:"Drop to attach";
+  position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;
+  border:2px dashed var(--acc-line);border-radius:var(--r-lg);background:var(--drag-bg);
+  color:var(--acc);font-size:var(--fs-sm);pointer-events:none;
+}
+
+/* --------------------------- lightbox ------------------------------ */
+/* Mounted as a portal on the body: in the chat or in a week column, it
+   would be clipped by the panel scrolling. */
+.attbox{
+  position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;padding:24px;
+  background:rgba(0,0,0,.82);backdrop-filter:blur(3px);cursor:zoom-out;
+}
+:root[data-theme="light"] .attbox{background:rgba(12,12,18,.72)}
+.attbox img{
+  max-width:min(1400px,94vw);max-height:78vh;object-fit:contain;
+  border-radius:var(--r);cursor:default;box-shadow:0 18px 60px rgba(0,0,0,.5);
+}
+.attboxclose{position:absolute;top:var(--s3);right:var(--s4);background:var(--pop);border-color:var(--pop-line);color:var(--txt)}
+.attboxfoot{
+  max-width:min(80ch,94vw);text-align:center;cursor:default;
+  display:flex;flex-direction:column;gap:6px;align-items:center;
+}
+.attboxname{color:var(--txt);font-size:var(--fs-sm)}
+.attboxfoot a{color:var(--acc);font-size:var(--fs-sm);text-decoration:none;border-bottom:1px solid var(--acc-line)}
+/* What the vision model read in the image. Bounded in height and scrollable:
+   some screenshot descriptions run twenty lines, and they would push the
+   image off the screen. */
+.attboxdesc{
+  color:var(--dim);font-size:var(--fs-sm);line-height:1.55;text-align:left;
+  max-height:22vh;overflow:auto;white-space:pre-wrap;
+}
+
+/* --------------------------- phone --------------------------------- */
+@media (max-width:860px){
+  .attimg img{max-width:min(46vw,230px);max-height:130px}
+  .attog{width:52px;height:52px}
+  .attbox{padding:14px}
+  .attbox img{max-height:70vh}
+}
+
+/* The strip of attachments waiting to be sent, above the chat field.
+   It lives OUTSIDE the horizontal flex of `.cin`: placed inside it, it would
+   crush the input field as soon as there is more than one thumbnail. The
+   height cap prevents a burst of screenshots from pushing the text area off
+   the screen. */
+.cattach{
+  padding:6px 10px 0;max-height:34vh;overflow-y:auto;
+  border-top:1px solid var(--line);
+}
+.chat.attdrop.dropover{outline:2px dashed var(--acc);outline-offset:-6px}

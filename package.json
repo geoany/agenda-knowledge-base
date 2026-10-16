@@ -1,0 +1,27 @@
+{
+  "name": "agenda-knowledge-base",
+  "version": "1.0.0",
+  "description": "A week to-do list driven by an LLM agent, with a markdown knowledge base, PWA, iCal sync and MCP servers.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "build": "npm --prefix web ci && npm --prefix web run build",
+    "test": "node scripts/test-triggers.mjs --examples",
+    "test:gcal": "node scripts/e2e-gcal.mjs",
+    "mcp:agenda": "node mcp/agenda.js",
+    "mcp:kb": "node mcp/kb.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "better-sqlite3": "^13.0.2",
+    "express": "^5.2.1",
+    "ical.js": "^2.2.1",
+    "zod": "^4.4.3"
+  }
+}

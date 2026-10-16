@@ -1,0 +1,21 @@
+{
+  "name": "agenda-knowledge-base-web",
+  "version": "1.0.0",
+  "description": "Front end (React + Vite PWA) of agenda-knowledge-base.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.5",
+    "vite": "^8.2.0"
+  },
+  "type": "module",
+  "private": true
+}

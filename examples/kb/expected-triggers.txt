@@ -1,0 +1,13 @@
+# What the note recall index MUST keep finding.
+#
+# One line = a sentence, then "=>", then part of the path of the note that must
+# be recalled. The file is replayed every time the index is regenerated
+# (scripts/triggers.mjs, and nightly): if a sentence stops finding its note,
+# the generation SAYS so instead of letting the recall die silently.
+#
+# Counterpart of anti-triggers.txt: that one watches false alarms
+# (sentences that must wake nothing), this one watches RECALL.
+
+how do I stop the procrastination on small chores => two-minute-rule
+time for my weekly review, where do I start => weekly-review
+the kitchen quote is way over budget => kitchen-budget
